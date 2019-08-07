@@ -3,6 +3,17 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const saltRounds = 10;
+const knex = require('knex')({
+  client: 'pg',
+  connection: {
+    host : '127.0.0.1',
+    user : 'carlomagno',
+    password : '',
+    database : 'smart-brain'
+  }
+});
+
+console.log(knex.select('*').from('users'));
 
 const app = express();
 app.use(bodyParser.json());
@@ -45,7 +56,7 @@ app.get('/', (req, res) =>{
 app.post('/signin', (req, res) => {
   if (req.body.email === database.users[0].email &&
       req.body.password === database.users[0].password) {
-    res.json('success');
+    res.json(database.users[0]);
   } else {
     res.status(400).json('error loggin in')
   }
