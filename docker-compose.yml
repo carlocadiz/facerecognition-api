@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+ face-recognition-api:
+   container_name: backend
+   
+   build: ./
+   command: npm start
+   working_dir: /Macintosh HD/Users/carlomagno/ZeroToMastery/facerecognition_api_docker2
+   ports: 
+     - "3000:3000"

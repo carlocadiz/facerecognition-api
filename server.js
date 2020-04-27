@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const saltRounds = 10;
 const knex = require('knex');
+const morgan = require('morgan')
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -23,6 +24,7 @@ const db = knex({
 });
 
 const app = express();
+app.use(morgan('combined'))
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -37,5 +39,5 @@ app.post('/imageurl', (req, res) => { image.handleApiCall(req,res) })
 
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`app is running on port ${process.env.PORT}`);
+  console.log(`app is running on port 3000`);
 })
